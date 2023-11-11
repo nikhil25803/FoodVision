@@ -96,3 +96,5 @@ def pred_and_plot(model_number, filename, class_names):
     plt.title(f"Prediction: {pred_class}")
     plt.axis(False)
     plt.show()
+
+    return pred_class
