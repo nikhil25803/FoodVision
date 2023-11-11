@@ -100,39 +100,46 @@ As **simplifying the model** didn't work too well, and the overfitting continued
 """
 # Create an augmented data generator instance
 
-train_datagen_augmented = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1/255.,
-                                            rotation_range=0.2,
-                                            width_shift_range=0.2,
-                                            height_shift_range=0.2,
-                                            zoom_range=0.2,
-                                            horizontal_flip=True)
+train_datagen_augmented = tf.keras.preprocessing.image.ImageDataGenerator(
+    rescale=1 / 255.0,
+    rotation_range=0.2,
+    width_shift_range=0.2,
+    height_shift_range=0.2,
+    zoom_range=0.2,
+    horizontal_flip=True,
+)
 
 
-train_data_augmented = train_datagen_augmented.flow_from_directory(train_dir, 
-                                               target_size=(224,224),
-                                                batch_size=32,
-                                                class_mode="categorical")
+train_data_augmented = train_datagen_augmented.flow_from_directory(
+    train_dir, target_size=(224, 224), batch_size=32, class_mode="categorical"
+)
 
 
 # Let's create a model for augmented training data
 
-model_3 = tf.keras.models.Sequential([
-    tf.keras.layers.Conv2D(10,3,input_shape=(224,224,3),activation="relu"),
-    tf.keras.layers.MaxPool2D(),
-    tf.keras.layers.Conv2D(10,3,activation="relu"),
-    tf.keras.layers.MaxPool2D(),
-    tf.keras.layers.Flatten(),
-    tf.keras.layers.Dense(10,activation="softmax")
-])
+model_3 = tf.keras.models.Sequential(
+    [
+        tf.keras.layers.Conv2D(10, 3, input_shape=(224, 224, 3), activation="relu"),
+        tf.keras.layers.MaxPool2D(),
+        tf.keras.layers.Conv2D(10, 3, activation="relu"),
+        tf.keras.layers.MaxPool2D(),
+        tf.keras.layers.Flatten(),
+        tf.keras.layers.Dense(10, activation="softmax"),
+    ]
+)
 
-model_3.compile(loss="categorical_crossentropy",
-               optimizer=tf.keras.optimizers.Adam(),
-               metrics=["accuracy"])
-history_3 = model_3.fit(train_data_augmented,
-                       epochs=5,
-                       steps_per_epoch=len(train_data_augmented),
-                       validation_data=test_data,
-                       validation_steps=len(test_data))
+model_3.compile(
+    loss="categorical_crossentropy",
+    optimizer=tf.keras.optimizers.Adam(),
+    metrics=["accuracy"],
+)
+history_3 = model_3.fit(
+    train_data_augmented,
+    epochs=5,
+    steps_per_epoch=len(train_data_augmented),
+    validation_data=test_data,
+    validation_steps=len(test_data),
+)
 
 model_3_result = model_1.evaluate(test_data)
 
