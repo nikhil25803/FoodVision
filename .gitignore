@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 
 # Hide all image data
-notebooks\__MACOSX
+__MACOSX
 *.zip
 *.jpg
 # C extensions
