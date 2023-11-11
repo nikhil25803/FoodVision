@@ -3,8 +3,15 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Hide all image data
+notebooks\__MACOSX
+*.zip
+*.jpg
 # C extensions
 *.so
+
+# VS Code Extension
+.vscode
 
 # Distribution / packaging
 .Python
