@@ -36,4 +36,3 @@ for dirpath, dirnames, filenames in os.walk("10_food_classes_all_data"):
     food_images += len(filenames)
 
 print(f"Successfully loaded {food_images} food images!!")
-
